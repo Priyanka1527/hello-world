@@ -1,0 +1,75 @@
+//Given a number n, find the largest number just smaller than  n that can be formed using the same digits as n
+
+import java.util.*;
+
+public class Nextgreaternumber{
+
+//to swap Two numbers
+	public static void swap(int arr[],int a,int b)
+		{
+			int temp=arr[a];
+			arr[a]=arr[b];
+			arr[b]=temp;
+		}
+
+
+	public static void main(String args[])
+	{
+		
+		int i,min;
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter the no. of digit in the number: ");  
+		int n = input.nextInt(); //take input for no. of digit
+		int[] digit = new int[n]; //Integer array to keep the number
+		System.out.println("Enter the number [ each digit separated by space]: "); //take input the actual number - each digit separated by space
+		
+		// Read the number
+		for(int j=0;j<n;j++)
+			digit[j]=input.nextInt();
+
+		// Print the number taken as input
+		System.out.println("\n\nYour number is as below: \n");
+		for(int j=0;j<n;j++)
+				System.out.print(digit[j]);
+
+		//Starting from the right find for the digit which is less than the immidiately traversed digit
+		for(i=n-1; i>0; i--)
+		{
+			if(digit[i]>digit[i-1])
+				break;
+			
+		}
+		
+		if(i==0)
+			System.out.println("\n\nNo Solution"); // The digits are in decreasing order
+		else
+		{
+			
+			int x=digit[i-1];
+			min=i;
+
+			//Find the digit which is greater than the previously found digit but smallest among the rest of right side digits
+			for(int j=i+1; j<n; j++) 
+			{
+				if(digit[j]> x && digit[j] < digit[min])
+				{
+					min=j;
+				}
+			}
+			
+			//Swap the digits
+			swap(digit,i-1,min);
+
+			//Sort the required part of the array
+			Arrays.sort(digit,i,n);
+
+			System.out.println("\n\nThe largest no. Smaller than the given number is below: \n");
+			for(int j=0;j<n;j++)
+				System.out.print(digit[j]);
+
+			System.out.println("\n\n-------------------------");
+		}
+		
+	}
+
+}

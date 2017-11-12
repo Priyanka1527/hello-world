@@ -1,0 +1,83 @@
+import java.io.*;
+import java.util.*;
+
+class Anagram
+{
+	// Driving function
+	public static void main(String args[])
+	{
+		
+		char[] word1 = {'s','i','l','e','n','t'};
+		char[] word2 = {'l','i','t','e','n','s'};
+		if(isAnagram(word1,word2))
+			System.out.println("\n The Two words are Anagrams! ");
+		else
+			System.out.println("\n The Two words are NOT Anagrams! ");
+	}
+
+	//Function to check if Anagrams
+	public static boolean isAnagram(char[] w1, char[] w2)
+	{
+		int n1 = w1.length;
+		int n2 = w2.length;
+		
+		//If the lengths of the words are different then they can't be Anagrams
+		if(n1 != n2)
+			return false;
+
+		//Sort the two trings
+		quicksort(w1, 0, n1-1);
+		quicksort(w2, 0, n2-1);
+
+		//If we find one word to be different, that means not anagram and return false
+		for(int a=0; a < n1; a++)
+		{
+			if(w1[a] != w2[a])
+				return false;
+		}
+
+		return true;
+	}
+
+	// Function Quicksort to sort the characters
+	public static void quicksort(char [] w, int si, int ei)
+	{
+		int pi;
+		if(si<ei)
+		{
+			pi=partition(w,si,ei);
+			quicksort(w, si, pi - 1);
+			quicksort(w, pi + 1, ei);
+		}
+	}
+
+	//Parition function to find the Pivot for Quicksort
+	public static int partition(char [] w, int si, int ei)
+	{
+		char x = w[ei];
+		int i = (si-1);
+		int j;
+
+		for(j = si; j <= ei - 1 ; j++)
+		{
+			if(w[j] <= x)
+			{
+				i++;
+				swap(w,i,j);
+			}
+		}
+		swap(w, i+1, ei);
+		return (i+1);
+
+	}
+
+	// To swap teo numbers
+	public static void swap(char [] w, int a, int b)
+	{
+		char tmp;
+		tmp = w[a];
+		w[a] = w[b];
+		w[b] = tmp;
+	}
+
+}

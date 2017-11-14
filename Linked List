@@ -3,12 +3,14 @@ import java.io.*;
 
 class LinkedList
 {
+	//create the header node of the list
 	static Node head;
 
+	//class definition of Node 
 	static class Node
 	{
-		int data;
-		Node next;
+		int data; //data part
+		Node next; //pointer part
 
 		Node(int d)
 		{
@@ -17,6 +19,7 @@ class LinkedList
 		}
 	}
 
+	// function to reverse the linked list
 	Node reverselist(Node node)
 	{
 		Node prev = null;
@@ -25,10 +28,10 @@ class LinkedList
 
 		while(current != null)
 		{
-			next = current.next;
-			current.next = prev;
-			prev = current;
-			current = next;
+			next = current.next; // Next node is the immidiate ahead of the current node
+			current.next = prev; // pointer to current node is set to point the previous
+			prev = current; // now the previous node contains the current node
+			current = next; // next node becomes the current node proceed further
 
 		}
 
@@ -36,6 +39,7 @@ class LinkedList
 		return node;
 	}
 
+	//function to print the linked list
 	void printlist(Node node)
 	{
 		while(node != null)

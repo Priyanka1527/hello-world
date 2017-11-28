@@ -1,0 +1,97 @@
+import java.io.*;
+import java.util.*;
+import java.text.DecimalFormat;
+			
+	
+public class StatsCollector 
+{
+    public static void main(String[] args) 
+    {
+
+		int max = 19000;	//max response time after which it timeout
+		int min = 1;		//assumed to be minimum response time
+
+        int[] numbers = new int[604800];
+		//int[] numbers = new int[5];
+
+        Random rand = new Random();		
+        for (int i = 0; i < numbers.length; i++) 
+		{
+            numbers[i] = rand.nextInt((max - min) + 1) + min;		//generate random numbers as Response time for given number of http requests
+			System.out.print("\nResponse Time for http request "+ (i+1) +" is: "+numbers[i] +"ms");
+        }
+
+		getMedian(numbers);
+		getAverage(numbers);
+		testMedian();
+		testAverage();
+	}
+
+		//Test Case
+		public static void testMedian() 
+		{
+			
+			int a[] = {11200,6400,15910};
+			System.out.println("\n\n The test case consists of values: \n" + a[0] + ", " + a[1] + ", " + a[2]);
+			System.out.println("\n\n------Test Case called for Median------");
+			System.out.println("\nThe correct median should be" + a[0]);
+			double result = getMedian(a);
+			if(result == 11200)
+				System.out.println("\nTest Case Succeeded!!!");
+			else
+				System.out.println("\nTest Case Failed!!!");
+		}
+
+		//Test Case
+		public static void testAverage() 
+		{
+
+			System.out.println("\n\n------Test Case called for Median------");
+			int a[] = {11200,6400,15910};
+			System.out.println("\nThe correct average should be 11,170");
+			double result = getAverage(a);
+			if(result == 11170)
+				System.out.println("\nTest Case Succeeded!!!");
+			else
+				System.out.println("\nTest Case Failed!!!");
+		}
+
+	
+
+		//Calculates Median Request Response Time
+		public static double getMedian(int[] numbers)
+		{
+			Arrays.sort(numbers);
+
+			if (numbers.length % 2 == 1)		//If number of http reuests are odd
+			{
+				System.out.println("\n\nMedian Request Response Time is: " + numbers[(numbers.length - 1) / 2]);
+				return (numbers[(numbers.length - 1) / 2]);
+			} 
+			else		//If number of http requests are even
+			{
+				int m1 = numbers[(numbers.length - 1) / 2];
+				int m2 = numbers[((numbers.length - 1) / 2) + 1];
+				double m = ((long) m1 + m2) / 2.0;
+				System.out.println("\n\nMedian Request Response Time is: " + new DecimalFormat("#.#").format(m));
+				return m;
+			}
+
+		}
+
+		//Calculates Average Request Response Time
+		public static double getAverage(int[] numbers)
+		{
+			int sum = 0;
+			double mean;
+			for(int i = 0; i < numbers.length; i++)
+            {
+              sum = sum + numbers[i];
+			}
+
+			mean = (double)sum / numbers.length;
+			System.out.println("\n\nAverage Request Response Time is: " + new DecimalFormat("#.#").format(mean));
+			return mean;
+		}
+
+}

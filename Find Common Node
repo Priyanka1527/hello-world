@@ -1,0 +1,88 @@
+/* To find and return the common node of two linked lists merged into a 'Y' shape */
+
+import java.io.*;
+import java.util.*;
+
+class Linkedlistintersect
+{
+	static Node head1, head2;
+
+	static class Node
+	{
+		int data;
+		Node next;
+
+		Node(int d)
+		{
+			data = d;
+			next = null;
+		}
+	}
+
+	int getcount(Node node)
+	{
+		int count =0;
+		while(node != null)
+		{
+			count++;
+			node = node.next;
+		}
+
+		return count;
+	}
+
+	int getnode()
+	{
+		int c1 = getcount(head1); //count no. of nodes in List1
+		int c2 = getcount(head2); //count no. of nodes in List2
+		int d;
+		if (c1 > c2)
+		{
+			d = c1 - c2;
+			return getintersection(d,head1,head2);
+		}
+		else
+		{
+			d = c2 - c1;
+			return getintersection(d,head2,head1);
+		}
+	}
+
+	int getintersection(int diff, Node curr1, Node curr2)
+	{
+		for(int i=0; i < diff; i++)
+		{
+			if(curr1 == null)
+				return -1;
+			curr1 = curr1.next;
+		}
+
+		while(curr1 != null && curr2 != null)
+		{
+			if (curr1.data == curr2.data)
+			{
+				return curr1.data;
+			}
+			curr1 = curr1.next;
+			curr2 = curr2.next;
+		}
+		return -1;
+	}
+		
+	public static void main(String args[])
+	{
+		Linkedlistintersect list = new Linkedlistintersect();
+		list.head1 = new Node(3);
+		list.head1.next = new Node(6);
+		list.head1.next.next = new Node(9);
+		list.head1.next.next.next = new Node(5);
+		list.head1.next.next.next.next = new Node(15);
+		list.head1.next.next.next.next.next = new Node(30);
+
+		list.head2 = new Node(10);
+		list.head2.next = new Node(15);
+		list.head2.next.next= new Node(30);
+
+		System.out.println("The Intersecting node: "+ list.getnode());
+	}
+}

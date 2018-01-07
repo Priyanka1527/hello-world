@@ -1,0 +1,51 @@
+
+public class Versioncomparator 
+{
+	public static void main(String[] args) 
+	{
+		String version1 = "10.3.41";
+		String version2 = "10.3.42";
+		
+		int result = compareVersion(version1,version2);
+		
+		if(result == -1)
+			System.out.println("Version 2 is latest!");
+		else if(result == 1)
+			System.out.println("Version 1 is latest!");
+		else
+			System.out.println("Version numbers are equal!");
+	}
+	
+	public static int compareVersion(String ver1,String ver2)
+	{
+		if(!ver1.contains("."))
+			ver1 = ver1 + ".0";
+		
+		if(ver1.startsWith("."))
+			ver1 = "0" + ver1;
+		
+		if(ver1.endsWith("."))
+			ver1 = ver1 + "0";
+		
+		if(!ver2.contains("."))
+			ver2 = ver2 + ".0";
+		
+		if(ver2.startsWith("."))
+			ver2 = "0" + ver2;
+		
+		if(ver2.endsWith("."))
+			ver2 = ver2 + "0";
+		
+		System.out.println("Version 1 = " + ver1 + ", Version2 = " + ver2);
+		
+		int result = ver1.compareTo(ver2) ;
+
+		if(result > 0 ) {result = 1;}
+		if(result < 0 ) {result = -1;}
+
+		return result;
+		
+			
+	}
+
+}

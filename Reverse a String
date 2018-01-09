@@ -1,0 +1,36 @@
+
+//import java.util.regex.*;
+
+public class Reverseword 
+{
+	
+	static String reversestring(String str)
+	{
+		//Pattern pattern = Pattern.complie("\\s");
+		
+		String[] temp = str.split("\\s") ;
+		String result = "";
+		 for(int i=0; i < temp.length ; i++)
+		 {
+			 if(i == temp.length-1)
+				 result = temp[i] + result;
+			 else
+				 result = " " + temp[i] + result; 
+		 }
+		 
+		 return result;
+	}
+	public static void main(String[] args) 
+	{
+		String s1 = "My name is Priyanka Saha";
+		String s2 = "I am a student at University of Kansas";
+		
+		System.out.println("String: " + s1);
+		System.out.println("Reverse: " + reversestring(s1));
+		
+		System.out.println("\nString: " + s2);
+		System.out.println("Reverse: " + reversestring(s2));
+		
+	}
+
+}

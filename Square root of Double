@@ -1,0 +1,46 @@
+
+public class Squareroot 
+{
+	public static void main(String[] args) 
+	{
+		System.out.println("The SquareRoot is: " + squareRoot(25.0));
+		System.out.println("The SquareRoot is: " + squareRoot(11));
+		System.out.println("The SquareRoot is: " + squareRoot(-11));
+		System.out.println("The SquareRoot is: " + squareRoot(0));
+		System.out.println("The SquareRoot is: " + squareRoot(1));
+		System.out.println("The SquareRoot is: " + Math.sqrt(25.0));
+	}
+	
+	public static double squareRoot(double x)
+	{
+		double low = 0, high = x, mid, result=0, precision = 0.00001;
+		
+		if(x == 0 || x == 1)
+			result = x;
+		if(x < 0)
+			result = -1.0;
+		else
+		{
+			while(high - low >= precision)
+			{
+				mid = (low + high)/2;
+				result = mid*mid;
+				
+				if(result == x)
+					return result;
+				
+				else if(result < x)
+				{
+					low = mid;
+				}
+				else if(result > x)
+				{
+					high = mid;
+				}
+			}
+			result = (low + high)/2;
+		}
+		return result;		
+	}
+
+}

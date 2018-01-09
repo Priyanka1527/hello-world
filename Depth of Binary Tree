@@ -1,0 +1,46 @@
+
+class Node
+{
+	int data;
+	Node left, right;
+	
+	Node(int item)
+	{
+		data = item;
+		left = right = null;
+	}
+}
+public class Binarytreedepth 
+{
+	Node root;
+	
+	static int maxdepth(Node node)
+	{
+		if(node == null)
+			return 0;
+		else
+		{
+			int ldepth = maxdepth(node.left);
+			int rdepth = maxdepth(node.right);
+			
+			if(ldepth > rdepth)
+				return (ldepth + 1);
+			else
+				return (rdepth + 1);
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		Binarytreedepth tree = new Binarytreedepth();
+		tree.root = new Node(1);
+		tree.root.left = new Node(2);
+		tree.root.right = new Node(3);
+		tree.root.right.left = new Node(4);
+		tree.root.right.right = new Node(5);
+		tree.root.right.right.left = new Node(15);
+		
+		System.out.println("The depth of the tree is: " + maxdepth(tree.root));
+	}
+
+}
